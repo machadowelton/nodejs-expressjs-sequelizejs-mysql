@@ -7,8 +7,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Usuario.associate = function(models) {
     Usuario.hasMany(models.Emprestimo, {
-      foreignKey: 'UsuarioId',
-      as: 'emprestimos'
+      as: 'emprestimos',
+      foreignKey: 'usuarioId'
     });
   };
   return Usuario;

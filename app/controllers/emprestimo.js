@@ -16,11 +16,35 @@ module.exports = {
                 res.status(500).json({mensagem: 'Erro'});
             });
     },
-    findAll(req, res) {
+    findAllByUser(req, res) {
         return Emprestimo.findAll({
             where: {
-                UsuarioId: req.params.id_usuario
+                usuarioId: req.params.id_usuario
             }
+        })
+            .then((emprestimos) => {
+                if(!emprestimos) res.status(404).json({mensagem: 'Nao encontrado'});
+                res.json(emprestimos);
+            })
+            .catch((err) => {
+                res.status(505).json({mensagem: 'Erro'});
+            });
+    },
+    findAllWithUser(req ,res) {
+        return Emprestimo.findAll({
+            include: 'usuario'
+        })
+            .then((emprestimos) => {
+                if(!emprestimos) res.status(404).json({mensagem: 'Nao encontrado'});
+                res.json(emprestimos);
+            })
+            .catch((err) => {
+                res.status(505).json({mensagem: 'Erro'});
+            });
+    },
+    findAllWithLivros(req, res) {
+        return Emprestimo.findAll({
+            include: ['livros']
         })
             .then((emprestimos) => {
                 if(!emprestimos) res.status(404).json({mensagem: 'Nao encontrado'});

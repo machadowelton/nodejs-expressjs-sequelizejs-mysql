@@ -10,6 +10,8 @@ const port = process.env.PORT || 8000;
 const routerStatus = express.Router();
 const routerUsuario = require('./app/routes/usuario');
 const routerEmprestimo = require('./app/routes/emprestimo');
+const routerLivro = require('./app/routes/livro');
+const routerSessao = require('./app/routes/sessao');
 
 routerStatus.get('/status',(req, res) => {
     res.json({mensagem:'ok'});
@@ -18,7 +20,9 @@ routerStatus.get('/status',(req, res) => {
 routers = [
     routerStatus,
     routerUsuario,
-    routerEmprestimo
+    routerEmprestimo,
+    routerLivro,
+    routerSessao
 ];
 
 app.use('/api', routers);
